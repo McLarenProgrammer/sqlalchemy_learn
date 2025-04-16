@@ -6,8 +6,9 @@ postgre_engine = create_engine(
     echo=True
 )
 
-stmt = text("SELECT login, password_hash, is_cataloger FROM users WHERE is_cataloger = :isCataloger")
 with Session(postgre_engine) as session:
-    result = session.execute(stmt, {"isCataloger": True})
-    for row in result:
-        print(f"Login: {row.login} Password_hash: {row.password_hash} Cataloger: {row.is_cataloger}")
+    result = session.execute(
+        text("UPDATE users SET is_cataloger=:isCataloger WHERE login=:login"),
+        [{"isCataloger": False, "login": "TUTUNKIN_MD"}, {"isCataloger": True, "login": "KURNOSOV_VP"}]
+    )
+    session.commit()
