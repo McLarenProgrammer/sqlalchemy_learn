@@ -37,4 +37,13 @@ postgre_engine = create_engine(
     echo=True
 )
 
+<<<<<<< HEAD
 Base.metadata.create_all(postgre_engine)
+=======
+with Session(postgre_engine) as session:
+    result = session.execute(
+        text("UPDATE users SET is_cataloger=:isCataloger WHERE login=:login"),
+        [{"isCataloger": False, "login": "TUTUNKIN_MD"}, {"isCataloger": True, "login": "KURNOSOV_VP"}]
+    )
+    session.commit()
+>>>>>>> 979f29d0d65430c6e2ccac1cfa8391937a6507aa
